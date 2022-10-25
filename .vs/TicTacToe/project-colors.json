@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "447f57bc-a024-424c-be6f-835f450db1b2": {
+      "ProjectGuid": "447f57bc-a024-424c-be6f-835f450db1b2",
+      "DisplayName": "TicTacToeTests",
+      "ColorIndex": 0
+    },
+    "5a90ce40-95c5-4d2b-b681-1af9004c1f31": {
+      "ProjectGuid": "5a90ce40-95c5-4d2b-b681-1af9004c1f31",
+      "DisplayName": "TicTacToe",
+      "ColorIndex": 1
+    }
+  },
+  "NextColorIndex": 2
+}
