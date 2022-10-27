@@ -6,49 +6,49 @@ namespace TicTacToe
 {
     public class Tile
     {
-        public int X {get; set;}
-        public int Y {get; set;}
+        public int Row {get; set;}
+        public int Column {get; set;}
         public char Symbol {get; set;}
     }
 
     public class Board
     {
-       private List<Tile> _plays = new List<Tile>();
+       private readonly List<Tile> _plays = new List<Tile>();
        
         public Board()
         {
-            for (int i = 0; i < 3; i++)
+            for (int rowIndex = 0; rowIndex < 3; rowIndex++)
             {
-                for (int j = 0; j < 3; j++)
+                for (int columnIndex = 0; columnIndex < 3; columnIndex++)
                 {
-                    _plays.Add(new Tile{ X = i, Y = j, Symbol = ' '});
+                    _plays.Add(new Tile{ Row = rowIndex, Column = columnIndex, Symbol = ' '});
                 }  
             }       
         }
-       public Tile TileAt(int x, int y)
+       public Tile TileAt(int row, int column)
        {
-           return _plays.Single(tile => tile.X == x && tile.Y == y);
+           return _plays.Single(tile => tile.Row == row && tile.Column == column);
        }
 
-       public void AddTileAt(char symbol, int x, int y)
+       public void AddTileAt(char symbol, int row, int column)
        {
            var newTile = new Tile
            {
-               X = x,
-               Y = y,
+               Row = row,
+               Column = column,
                Symbol = symbol
            };
 
-           _plays.Single(tile => tile.X == x && tile.Y == y).Symbol = symbol;
+           _plays.Single(tile => tile.Row == row && tile.Column == column).Symbol = symbol;
        }
     }
 
     public class Game
     {
         private char _lastSymbol = ' ';
-        private Board _board = new Board();
+        private readonly Board _board = new Board();
         
-        public void Play(char symbol, int x, int y)
+        public void Play(char symbol, int row, int column)
         {
             //if first move
             if(_lastSymbol == ' ')
@@ -65,14 +65,14 @@ namespace TicTacToe
                 throw new Exception("Invalid next player");
             }
             //if not first move but play on an already played tile
-            else if (_board.TileAt(x, y).Symbol != ' ')
+            else if (_board.TileAt(row, column).Symbol != ' ')
             {
                 throw new Exception("Invalid position");
             }
 
             // update game state
             _lastSymbol = symbol;
-            _board.AddTileAt(symbol, x, y);
+            _board.AddTileAt(symbol, row, column);
         }
 
         public char Winner()
