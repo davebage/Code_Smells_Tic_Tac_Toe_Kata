@@ -24,9 +24,7 @@ namespace TicTacToeTests
         [Fact]
         public void NotAllowPlayerOToPlayFirst()
         {
-            Action wrongPlay = () => game.Play('O', TopRow, LeftColumn);
-
-            var exception = Assert.Throws<Exception>(wrongPlay);
+            var exception = Assert.Throws<Exception>(() => game.Play('O', TopRow, LeftColumn));
             Assert.Equal("Invalid player", exception.Message);
         }
 
@@ -34,10 +32,8 @@ namespace TicTacToeTests
         public void NotAllowPlayerXToPlayTwiceInARow()
         {
             game.Play('X', 0, 0);
-            
-            Action wrongPlay = () => game.Play('X', MiddleRow, LeftColumn);
 
-            var exception = Assert.Throws<Exception>(wrongPlay);
+            var exception = Assert.Throws<Exception>(() => game.Play('X', MiddleRow, LeftColumn));
             Assert.Equal("Invalid player", exception.Message);
         }
 
@@ -46,9 +42,7 @@ namespace TicTacToeTests
         {
             game.Play('X', 0, 0);
 
-            Action wrongPlay = () => game.Play('O', TopRow, LeftColumn);
-
-            var exception = Assert.Throws<Exception>(wrongPlay);
+            var exception = Assert.Throws<Exception>(() => game.Play('O', TopRow, LeftColumn));
             Assert.Equal("Invalid position", exception.Message);
         }
 
@@ -58,9 +52,7 @@ namespace TicTacToeTests
             game.Play('X', TopRow, LeftColumn);
             game.Play('O', MiddleRow, LeftColumn);
 
-            Action wrongPlay = () => game.Play('X', TopRow, LeftColumn);
-
-            var exception = Assert.Throws<Exception>(wrongPlay);
+            var exception = Assert.Throws<Exception>(() => game.Play('X', TopRow, LeftColumn));
             Assert.Equal("Invalid position", exception.Message);
         }
 
