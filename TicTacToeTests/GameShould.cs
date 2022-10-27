@@ -8,6 +8,10 @@ namespace TicTacToeTests
     {
         private Game game;
 
+        private const int TopRow = 0;
+        private const int MiddleRow = 1;
+        private const int BottomRow = 2;
+
         public GameShould()
         {
            game = new Game();
@@ -16,7 +20,7 @@ namespace TicTacToeTests
         [Fact]
         public void NotAllowPlayerOToPlayFirst()
         {
-            Action wrongPlay = () => game.Play('O', 0, 0);
+            Action wrongPlay = () => game.Play('O', TopRow, 0);
 
             var exception = Assert.Throws<Exception>(wrongPlay);
             Assert.Equal("Invalid first player", exception.Message);
@@ -27,7 +31,7 @@ namespace TicTacToeTests
         {
             game.Play('X', 0, 0);
             
-            Action wrongPlay = () => game.Play('X', 1, 0);
+            Action wrongPlay = () => game.Play('X', MiddleRow, 0);
 
             var exception = Assert.Throws<Exception>(wrongPlay);
             Assert.Equal("Invalid next player", exception.Message);
@@ -38,7 +42,7 @@ namespace TicTacToeTests
         {
             game.Play('X', 0, 0);
 
-            Action wrongPlay = () => game.Play('O', 0, 0);
+            Action wrongPlay = () => game.Play('O', TopRow, 0);
 
             var exception = Assert.Throws<Exception>(wrongPlay);
             Assert.Equal("Invalid position", exception.Message);
@@ -47,10 +51,10 @@ namespace TicTacToeTests
         [Fact]
         public void NotAllowPlayerToPlayInAnyPlayedPosition()
         {
-            game.Play('X', 0, 0);
-            game.Play('O', 1, 0);
+            game.Play('X', TopRow, 0);
+            game.Play('O', MiddleRow, 0);
 
-            Action wrongPlay = () => game.Play('X', 0, 0);
+            Action wrongPlay = () => game.Play('X', TopRow, 0);
 
             var exception = Assert.Throws<Exception>(wrongPlay);
             Assert.Equal("Invalid position", exception.Message);
@@ -59,11 +63,11 @@ namespace TicTacToeTests
         [Fact]
         public void DeclarePlayerXAsAWinnerIfThreeInTopRow()
         {
-            game.Play('X', 0, 0);
-            game.Play('O', 1, 0);
-            game.Play('X', 0, 1);
-            game.Play('O', 1, 1);
-            game.Play('X', 0, 2);
+            game.Play('X', TopRow, 0);
+            game.Play('O', MiddleRow, 0);
+            game.Play('X', TopRow, 1);
+            game.Play('O', MiddleRow, 1);
+            game.Play('X', TopRow, 2);
 
             var winner = game.Winner();
 
@@ -73,12 +77,12 @@ namespace TicTacToeTests
         [Fact]
         public void DeclarePlayerOAsAWinnerIfThreeInTopRow()
         {
-            game.Play('X', 2, 2);
-            game.Play('O', 0, 0);
-            game.Play('X', 1, 0);
-            game.Play('O', 0, 1);
-            game.Play('X', 1, 1);
-            game.Play('O', 0, 2);
+            game.Play('X', BottomRow, 2);
+            game.Play('O', TopRow, 0);
+            game.Play('X', MiddleRow, 0);
+            game.Play('O', TopRow, 1);
+            game.Play('X', MiddleRow, 1);
+            game.Play('O', TopRow, 2);
 
             var winner = game.Winner();
 
@@ -88,11 +92,11 @@ namespace TicTacToeTests
         [Fact]
         public void DeclarePlayerXAsAWinnerIfThreeInMiddleRow()
         {
-            game.Play('X', 1, 0);
-            game.Play('O', 0, 0);
-            game.Play('X', 1, 1);
-            game.Play('O', 0, 1);
-            game.Play('X', 1, 2);
+            game.Play('X', MiddleRow, 0);
+            game.Play('O', TopRow, 0);
+            game.Play('X', MiddleRow, 1);
+            game.Play('O', TopRow, 1);
+            game.Play('X', MiddleRow, 2);
 
             var winner = game.Winner();
 
@@ -102,12 +106,12 @@ namespace TicTacToeTests
         [Fact]
         public void DeclarePlayerOAsAWinnerIfThreeInMiddleRow()
         {
-            game.Play('X', 0, 0);
-            game.Play('O', 1, 0);
-            game.Play('X', 2, 0);
-            game.Play('O', 1, 1);
-            game.Play('X', 2, 1);
-            game.Play('O', 1, 2);
+            game.Play('X', TopRow, 0);
+            game.Play('O', MiddleRow, 0);
+            game.Play('X', BottomRow, 0);
+            game.Play('O', MiddleRow, 1);
+            game.Play('X', BottomRow, 1);
+            game.Play('O', MiddleRow, 2);
 
             var winner = game.Winner();
 
@@ -117,11 +121,11 @@ namespace TicTacToeTests
         [Fact]
         public void DeclarePlayerXAsAWinnerIfThreeInBottomRow()
         {
-            game.Play('X', 2, 0);
-            game.Play('O', 0, 0);
-            game.Play('X', 2, 1);
-            game.Play('O', 0, 1);
-            game.Play('X', 2, 2);
+            game.Play('X', BottomRow, 0);
+            game.Play('O', TopRow, 0);
+            game.Play('X', BottomRow, 1);
+            game.Play('O', TopRow, 1);
+            game.Play('X', BottomRow, 2);
 
             var winner = game.Winner();
 
@@ -131,12 +135,12 @@ namespace TicTacToeTests
         [Fact]
         public void DeclarePlayerOAsAWinnerIfThreeInBottomRow()
         {
-            game.Play('X', 0, 0);
-            game.Play('O', 2, 0);
-            game.Play('X', 1, 0);
-            game.Play('O', 2, 1);
-            game.Play('X', 1, 1);
-            game.Play('O', 2, 2);
+            game.Play('X', TopRow, 0);
+            game.Play('O', BottomRow, 0);
+            game.Play('X', MiddleRow, 0);
+            game.Play('O', BottomRow, 1);
+            game.Play('X', MiddleRow, 1);
+            game.Play('O', BottomRow, 2);
 
             var winner = game.Winner();
 
