@@ -6,11 +6,12 @@ namespace TicTacToeTests
 {
     public class GameShould
     {
-        private Game game;
+        private readonly Game game;
 
         private const int TopRow = 0;
         private const int MiddleRow = 1;
         private const int BottomRow = 2;
+
 
         public GameShould()
         {
