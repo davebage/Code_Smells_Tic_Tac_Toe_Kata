@@ -27,7 +27,7 @@ namespace TicTacToeTests
             Action wrongPlay = () => game.Play('O', TopRow, LeftColumn);
 
             var exception = Assert.Throws<Exception>(wrongPlay);
-            Assert.Equal("Invalid first player", exception.Message);
+            Assert.Equal("Invalid player", exception.Message);
         }
 
         [Fact]
@@ -38,7 +38,7 @@ namespace TicTacToeTests
             Action wrongPlay = () => game.Play('X', MiddleRow, LeftColumn);
 
             var exception = Assert.Throws<Exception>(wrongPlay);
-            Assert.Equal("Invalid next player", exception.Message);
+            Assert.Equal("Invalid player", exception.Message);
         }
 
         [Fact]
