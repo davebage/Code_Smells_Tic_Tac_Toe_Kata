@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 namespace TicTacToe
 {
-    public class Coordinate
+    public class Coordinate : IEquatable<Coordinate>
     {
         private readonly int _row;
         private readonly int _column;
@@ -15,24 +15,30 @@ namespace TicTacToe
             _row = row;
             _column = column;
         }
+
+        public bool Equals(Coordinate other)
+        {
+            if(other == null) return false;
+
+            return _row == other._row && 
+                   _column == other._column;
+        }
     }
 
-    public class Tile
+    public class Tile 
     {
-        public int Row { get; set; }
-        public int Column { get; set; }
+        private readonly Coordinate _coordinate;
         public char Symbol { get; set; }
 
         public Tile(char symbol, int row, int column)
         {
             Symbol = symbol;
-            Row = row;
-            Column = column;
+            _coordinate = new Coordinate(row, column);
         }
 
-        public bool CompareRow(int row)
+        public bool CompareCoordinate(Coordinate other)
         {
-            return this.Row == row;
+            return _coordinate.Equals(other);
         }
     }
 
@@ -40,12 +46,9 @@ namespace TicTacToe
     {
         private readonly List<Tile> _plays = new List<Tile>();
 
-        public Board()
-        {
-        }
         public Tile TileAt(int row, int column)
         {
-            return _plays.FirstOrDefault(tile => tile.Row == row && tile.Column == column);
+            return _plays.FirstOrDefault(tile => tile.CompareCoordinate(new Coordinate(row, column)));
         }
 
         public void AddTileAt(char symbol, int row, int column)
@@ -71,7 +74,6 @@ namespace TicTacToe
                 throw new Exception("Invalid position");
             }
 
-            // update game state
             _lastSymbol = symbol;
             _board.AddTileAt(symbol, row, column);
         }
