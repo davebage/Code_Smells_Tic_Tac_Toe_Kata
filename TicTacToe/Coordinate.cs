@@ -20,5 +20,11 @@ namespace TicTacToe
             return _row == other._row && 
                    _column == other._column;
         }
+
+        public bool CompareRow(Coordinate other)
+        {
+            if (other == null) return false;
+            return _row == other._row;
+        }
     }
 }
