@@ -5,11 +5,6 @@ using System.Runtime.InteropServices;
 
 namespace TicTacToe
 {
-    public enum Token
-    {
-        X,
-        O
-    }
     public class Coordinate : IEquatable<Coordinate>
     {
         private readonly int _row;
