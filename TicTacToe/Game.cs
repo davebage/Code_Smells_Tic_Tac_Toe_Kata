@@ -1,14 +1,34 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 namespace TicTacToe
 {
+    public class Coordinate
+    {
+        private readonly int _row;
+        private readonly int _column;
+
+        public Coordinate(int row, int column)
+        {
+            _row = row;
+            _column = column;
+        }
+    }
+
     public class Tile
     {
         public int Row { get; set; }
         public int Column { get; set; }
         public char Symbol { get; set; }
+
+        public Tile(char symbol, int row, int column)
+        {
+            Symbol = symbol;
+            Row = row;
+            Column = column;
+        }
 
         public bool CompareRow(int row)
         {
@@ -30,7 +50,7 @@ namespace TicTacToe
 
         public void AddTileAt(char symbol, int row, int column)
         {
-            _plays.Add(new Tile { Row = row, Column = column, Symbol = symbol });
+            _plays.Add(new Tile(symbol, row, column));
         }
     }
 
