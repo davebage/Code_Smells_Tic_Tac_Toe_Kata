@@ -5,6 +5,11 @@ using System.Runtime.InteropServices;
 
 namespace TicTacToe
 {
+    public enum Token
+    {
+        X,
+        O
+    }
     public class Coordinate : IEquatable<Coordinate>
     {
         private readonly int _row;
@@ -28,9 +33,9 @@ namespace TicTacToe
     public class Tile 
     {
         private readonly Coordinate _coordinate;
-        public char Symbol { get; set; }
+        public Token Symbol { get; set; }
 
-        public Tile(char symbol, int row, int column)
+        public Tile(Token symbol, int row, int column)
         {
             Symbol = symbol;
             _coordinate = new Coordinate(row, column);
@@ -51,7 +56,7 @@ namespace TicTacToe
             return _plays.FirstOrDefault(tile => tile.CompareCoordinate(new Coordinate(row, column)));
         }
 
-        public void AddTileAt(char symbol, int row, int column)
+        public void AddTileAt(Token symbol, int row, int column)
         {
             _plays.Add(new Tile(symbol, row, column));
         }
@@ -59,10 +64,10 @@ namespace TicTacToe
 
     public class Game
     {
-        private char _lastSymbol = 'O';
+        private Token _lastSymbol = Token.O;
         private readonly Board _board = new Board();
 
-        public void Play(char symbol, int row, int column)
+        public void Play(Token symbol, int row, int column)
         {
             if (symbol == _lastSymbol)
             {
@@ -78,7 +83,7 @@ namespace TicTacToe
             _board.AddTileAt(symbol, row, column);
         }
 
-        public char Winner()
+        public Token? Winner()
         {
             var rowIndex = 0;
             if (IsRowPopulated(rowIndex) && RowTilesMatch(rowIndex))
@@ -98,7 +103,7 @@ namespace TicTacToe
                 return _board.TileAt(rowIndex, 0).Symbol;
             }
 
-            return ' ';
+            return null;
         }
 
         private bool RowTilesMatch(int rowIndex)
