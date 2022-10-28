@@ -45,7 +45,7 @@ namespace TicTacToe
             {
                 throw new Exception("Invalid player");
             }
-            
+
             if (_board.TileAt(row, column) != null)
             {
                 throw new Exception("Invalid position");
@@ -58,43 +58,33 @@ namespace TicTacToe
 
         public char Winner()
         {
-            if (IsRowPopulated(0))
+            var rowIndex = 0;
+            if (IsRowPopulated(rowIndex) && RowTilesMatch(rowIndex))
             {
-                //if first row is full with same symbol
-                if (_board.TileAt(0, 0).Symbol ==
-                    _board.TileAt(0, 1).Symbol &&
-                    _board.TileAt(0, 2).Symbol ==
-                    _board.TileAt(0, 1).Symbol)
-                {
-                    return _board.TileAt(0, 0).Symbol;
-                }
+                return _board.TileAt(rowIndex, 0).Symbol;
             }
 
-            if (IsRowPopulated(1))
+            rowIndex = 1;
+            if (IsRowPopulated(rowIndex) && RowTilesMatch(rowIndex))
             {
-                //if middle row is full with same symbol
-                if (_board.TileAt(1, 0).Symbol ==
-                    _board.TileAt(1, 1).Symbol &&
-                    _board.TileAt(1, 2).Symbol ==
-                    _board.TileAt(1, 1).Symbol)
-                {
-                    return _board.TileAt(1, 0).Symbol;
-                }
+                return _board.TileAt(rowIndex, 0).Symbol;
             }
 
-            if (IsRowPopulated(2))
+            rowIndex = 2;
+            if (IsRowPopulated(rowIndex) && RowTilesMatch(rowIndex))
             {
-                //if middle row is full with same symbol
-                if (_board.TileAt(2, 0).Symbol ==
-                    _board.TileAt(2, 1).Symbol &&
-                    _board.TileAt(2, 2).Symbol ==
-                    _board.TileAt(2, 1).Symbol)
-                {
-                    return _board.TileAt(2, 0).Symbol;
-                }
+                return _board.TileAt(rowIndex, 0).Symbol;
             }
 
             return ' ';
+        }
+
+        private bool RowTilesMatch(int rowIndex)
+        {
+            return _board.TileAt(rowIndex, 0).Symbol ==
+                   _board.TileAt(rowIndex, 1).Symbol &&
+                   _board.TileAt(rowIndex, 2).Symbol ==
+                   _board.TileAt(rowIndex, 1).Symbol;
         }
 
         private bool IsRowPopulated(int rowIndex)
