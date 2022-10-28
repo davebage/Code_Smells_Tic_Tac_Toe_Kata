@@ -32,38 +32,19 @@ namespace TicTacToe
 
         public Token? Winner()
         {
-            var rowIndex = 0;
-            if (IsRowPopulated(rowIndex) && RowTilesMatch(rowIndex))
+            var index = 0;
+            Tile tile = null;
+            while (tile == null && index < 3)
             {
-                return _board.TileAt(rowIndex, 0).GetToken();
+                if (_board.CheckHorizontalWin(new Coordinate(index, 0)))
+                    tile = _board.TileAt(new Coordinate(index, 0));
+                index++;
             }
 
-            rowIndex = 1;
-            if (IsRowPopulated(rowIndex) && RowTilesMatch(rowIndex))
-            {
-                return _board.TileAt(rowIndex, 0).GetToken();
-            }
+            if (tile == null) return null;
 
-            rowIndex = 2;
-            if (IsRowPopulated(rowIndex) && RowTilesMatch(rowIndex))
-            {
-                return _board.TileAt(rowIndex, 0).GetToken();
-            }
 
-            return null;
-        }
-
-        private bool RowTilesMatch(int rowIndex)
-        {
-            return _board.TileAt(rowIndex, 0).CompareSymbol(_board.TileAt(rowIndex, 1)) &&
-                   _board.TileAt(rowIndex, 2).CompareSymbol(_board.TileAt(rowIndex, 1));
-        }
-
-        private bool IsRowPopulated(int rowIndex)
-        {
-            return _board.TileAt(rowIndex, 0) != null &&
-                   _board.TileAt(rowIndex, 1) != null &&
-                   _board.TileAt(rowIndex, 2) != null;
+            return tile.GetToken();
         }
     }
 }
