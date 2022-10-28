@@ -27,5 +27,10 @@
             return _symbol;
         }
 
+        public bool CompareRow(Coordinate other)
+        {
+            if (other == null) return false;
+            return _coordinate.CompareRow(other);
+        }
     }
 }
