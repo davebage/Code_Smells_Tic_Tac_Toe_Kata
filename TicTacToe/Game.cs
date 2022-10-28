@@ -9,6 +9,11 @@ namespace TicTacToe
         public int Row { get; set; }
         public int Column { get; set; }
         public char Symbol { get; set; }
+
+        public bool CompareRow(int row)
+        {
+            return this.Row == row;
+        }
     }
 
     public class Board
@@ -17,13 +22,6 @@ namespace TicTacToe
 
         public Board()
         {
-            //for (int rowIndex = 0; rowIndex < 3; rowIndex++)
-            //{
-            //    for (int columnIndex = 0; columnIndex < 3; columnIndex++)
-            //    {
-            //        _plays.Add(new Tile { Row = rowIndex, Column = columnIndex, Symbol = ' ' });
-            //    }
-            //}
         }
         public Tile TileAt(int row, int column)
         {
