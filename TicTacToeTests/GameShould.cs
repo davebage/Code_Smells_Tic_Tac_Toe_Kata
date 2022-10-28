@@ -24,123 +24,123 @@ namespace TicTacToeTests
         [Fact]
         public void NotAllowPlayerOToPlayFirst()
         {
-            var exception = Assert.Throws<Exception>(() => game.Play('O', TopRow, LeftColumn));
+            var exception = Assert.Throws<Exception>(() => game.Play(Token.O, TopRow, LeftColumn));
             Assert.Equal("Invalid player", exception.Message);
         }
 
         [Fact]
         public void NotAllowPlayerXToPlayTwiceInARow()
         {
-            game.Play('X', 0, 0);
+            game.Play(Token.X, 0, 0);
 
-            var exception = Assert.Throws<Exception>(() => game.Play('X', MiddleRow, LeftColumn));
+            var exception = Assert.Throws<Exception>(() => game.Play(Token.X, MiddleRow, LeftColumn));
             Assert.Equal("Invalid player", exception.Message);
         }
 
         [Fact]
         public void NotAllowPlayerToPlayInLastPlayedPosition()
         {
-            game.Play('X', 0, 0);
+            game.Play(Token.X, 0, 0);
 
-            var exception = Assert.Throws<Exception>(() => game.Play('O', TopRow, LeftColumn));
+            var exception = Assert.Throws<Exception>(() => game.Play(Token.O, TopRow, LeftColumn));
             Assert.Equal("Invalid position", exception.Message);
         }
 
         [Fact]
         public void NotAllowPlayerToPlayInAnyPlayedPosition()
         {
-            game.Play('X', TopRow, LeftColumn);
-            game.Play('O', MiddleRow, LeftColumn);
+            game.Play(Token.X, TopRow, LeftColumn);
+            game.Play(Token.O, MiddleRow, LeftColumn);
 
-            var exception = Assert.Throws<Exception>(() => game.Play('X', TopRow, LeftColumn));
+            var exception = Assert.Throws<Exception>(() => game.Play(Token.X, TopRow, LeftColumn));
             Assert.Equal("Invalid position", exception.Message);
         }
 
         [Fact]
         public void DeclarePlayerXAsAWinnerIfThreeInTopRow()
         {
-            game.Play('X', TopRow, LeftColumn);
-            game.Play('O', MiddleRow, LeftColumn);
-            game.Play('X', TopRow, MiddleColumn);
-            game.Play('O', MiddleRow, MiddleColumn);
-            game.Play('X', TopRow, RightColumn);
+            game.Play(Token.X, TopRow, LeftColumn);
+            game.Play(Token.O, MiddleRow, LeftColumn);
+            game.Play(Token.X, TopRow, MiddleColumn);
+            game.Play(Token.O, MiddleRow, MiddleColumn);
+            game.Play(Token.X, TopRow, RightColumn);
 
             var winner = game.Winner();
 
-            Assert.Equal('X', winner);
+            Assert.Equal(Token.X, winner);
         }
 
         [Fact]
         public void DeclarePlayerOAsAWinnerIfThreeInTopRow()
         {
-            game.Play('X', BottomRow, RightColumn);
-            game.Play('O', TopRow, LeftColumn);
-            game.Play('X', MiddleRow, LeftColumn);
-            game.Play('O', TopRow, MiddleColumn);
-            game.Play('X', MiddleRow, MiddleColumn);
-            game.Play('O', TopRow, RightColumn);
+            game.Play(Token.X, BottomRow, RightColumn);
+            game.Play(Token.O, TopRow, LeftColumn);
+            game.Play(Token.X, MiddleRow, LeftColumn);
+            game.Play(Token.O, TopRow, MiddleColumn);
+            game.Play(Token.X, MiddleRow, MiddleColumn);
+            game.Play(Token.O, TopRow, RightColumn);
 
             var winner = game.Winner();
 
-            Assert.Equal('O', winner);
+            Assert.Equal(Token.O, winner);
         }
 
         [Fact]
         public void DeclarePlayerXAsAWinnerIfThreeInMiddleRow()
         {
-            game.Play('X', MiddleRow, LeftColumn);
-            game.Play('O', TopRow, LeftColumn);
-            game.Play('X', MiddleRow, MiddleColumn);
-            game.Play('O', TopRow, MiddleColumn);
-            game.Play('X', MiddleRow, RightColumn);
+            game.Play(Token.X, MiddleRow, LeftColumn);
+            game.Play(Token.O, TopRow, LeftColumn);
+            game.Play(Token.X, MiddleRow, MiddleColumn);
+            game.Play(Token.O, TopRow, MiddleColumn);
+            game.Play(Token.X, MiddleRow, RightColumn);
 
             var winner = game.Winner();
 
-            Assert.Equal('X', winner);
+            Assert.Equal(Token.X, winner);
         }
 
         [Fact]
         public void DeclarePlayerOAsAWinnerIfThreeInMiddleRow()
         {
-            game.Play('X', TopRow, LeftColumn);
-            game.Play('O', MiddleRow, LeftColumn);
-            game.Play('X', BottomRow, LeftColumn);
-            game.Play('O', MiddleRow, MiddleColumn);
-            game.Play('X', BottomRow, MiddleColumn);
-            game.Play('O', MiddleRow, RightColumn);
+            game.Play(Token.X, TopRow, LeftColumn);
+            game.Play(Token.O, MiddleRow, LeftColumn);
+            game.Play(Token.X, BottomRow, LeftColumn);
+            game.Play(Token.O, MiddleRow, MiddleColumn);
+            game.Play(Token.X, BottomRow, MiddleColumn);
+            game.Play(Token.O, MiddleRow, RightColumn);
 
             var winner = game.Winner();
 
-            Assert.Equal('O', winner);
+            Assert.Equal(Token.O, winner);
         }
 
         [Fact]
         public void DeclarePlayerXAsAWinnerIfThreeInBottomRow()
         {
-            game.Play('X', BottomRow, LeftColumn);
-            game.Play('O', TopRow, LeftColumn);
-            game.Play('X', BottomRow, MiddleColumn);
-            game.Play('O', TopRow, MiddleColumn);
-            game.Play('X', BottomRow, RightColumn);
+            game.Play(Token.X, BottomRow, LeftColumn);
+            game.Play(Token.O, TopRow, LeftColumn);
+            game.Play(Token.X, BottomRow, MiddleColumn);
+            game.Play(Token.O, TopRow, MiddleColumn);
+            game.Play(Token.X, BottomRow, RightColumn);
 
             var winner = game.Winner();
 
-            Assert.Equal('X', winner);
+            Assert.Equal(Token.X, winner);
         }
 
         [Fact]
         public void DeclarePlayerOAsAWinnerIfThreeInBottomRow()
         {
-            game.Play('X', TopRow, LeftColumn);
-            game.Play('O', BottomRow, LeftColumn);
-            game.Play('X', MiddleRow, LeftColumn);
-            game.Play('O', BottomRow, MiddleColumn);
-            game.Play('X', MiddleRow, MiddleColumn);
-            game.Play('O', BottomRow, RightColumn);
+            game.Play(Token.X, TopRow, LeftColumn);
+            game.Play(Token.O, BottomRow, LeftColumn);
+            game.Play(Token.X, MiddleRow, LeftColumn);
+            game.Play(Token.O, BottomRow, MiddleColumn);
+            game.Play(Token.X, MiddleRow, MiddleColumn);
+            game.Play(Token.O, BottomRow, RightColumn);
 
             var winner = game.Winner();
 
-            Assert.Equal('O', winner);
+            Assert.Equal(Token.O, winner);
         }
     }
 }
