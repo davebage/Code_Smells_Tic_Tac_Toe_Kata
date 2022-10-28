@@ -58,9 +58,7 @@ namespace TicTacToe
 
         public char Winner()
         {
-            if (_board.TileAt(0, 0) != null &&
-               _board.TileAt(0, 1) != null &&
-               _board.TileAt(0, 2) != null)
+            if (IsRowPopulated(0))
             {
                 //if first row is full with same symbol
                 if (_board.TileAt(0, 0).Symbol ==
@@ -72,9 +70,7 @@ namespace TicTacToe
                 }
             }
 
-            if (_board.TileAt(1, 0) != null &&
-               _board.TileAt(1, 1) != null &&
-               _board.TileAt(1, 2) != null)
+            if (IsRowPopulated(1))
             {
                 //if middle row is full with same symbol
                 if (_board.TileAt(1, 0).Symbol ==
@@ -86,9 +82,7 @@ namespace TicTacToe
                 }
             }
 
-            if (_board.TileAt(2, 0) != null &&
-               _board.TileAt(2, 1) != null &&
-               _board.TileAt(2, 2) != null)
+            if (IsRowPopulated(2))
             {
                 //if middle row is full with same symbol
                 if (_board.TileAt(2, 0).Symbol ==
@@ -101,6 +95,13 @@ namespace TicTacToe
             }
 
             return ' ';
+        }
+
+        private bool IsRowPopulated(int rowIndex)
+        {
+            return _board.TileAt(rowIndex, 0) != null &&
+                   _board.TileAt(rowIndex, 1) != null &&
+                   _board.TileAt(rowIndex, 2) != null;
         }
     }
 }
