@@ -30,21 +30,33 @@ namespace TicTacToe
         }
     }
 
-    public class Tile 
+    public class Tile
     {
+        private readonly Token _symbol;
         private readonly Coordinate _coordinate;
-        public Token Symbol { get; set; }
 
-        public Tile(Token symbol, int row, int column)
+        public Tile(Token symbol, Coordinate coordinate)
         {
-            Symbol = symbol;
-            _coordinate = new Coordinate(row, column);
+            _coordinate = coordinate;
+            _symbol = symbol;
         }
 
         public bool CompareCoordinate(Coordinate other)
         {
             return _coordinate.Equals(other);
         }
+
+        public bool CompareSymbol(Tile other)
+        {
+            if(other == null) return false;
+            return other._symbol == _symbol;
+        }
+
+        public Token GetToken()
+        {
+            return _symbol;
+        }
+
     }
 
     public class Board
@@ -58,7 +70,7 @@ namespace TicTacToe
 
         public void AddTileAt(Token symbol, int row, int column)
         {
-            _plays.Add(new Tile(symbol, row, column));
+            _plays.Add(new Tile(symbol, new Coordinate(row, column)));
         }
     }
 
@@ -88,19 +100,19 @@ namespace TicTacToe
             var rowIndex = 0;
             if (IsRowPopulated(rowIndex) && RowTilesMatch(rowIndex))
             {
-                return _board.TileAt(rowIndex, 0).Symbol;
+                return _board.TileAt(rowIndex, 0).GetToken();
             }
 
             rowIndex = 1;
             if (IsRowPopulated(rowIndex) && RowTilesMatch(rowIndex))
             {
-                return _board.TileAt(rowIndex, 0).Symbol;
+                return _board.TileAt(rowIndex, 0).GetToken();
             }
 
             rowIndex = 2;
             if (IsRowPopulated(rowIndex) && RowTilesMatch(rowIndex))
             {
-                return _board.TileAt(rowIndex, 0).Symbol;
+                return _board.TileAt(rowIndex, 0).GetToken();
             }
 
             return null;
@@ -108,10 +120,8 @@ namespace TicTacToe
 
         private bool RowTilesMatch(int rowIndex)
         {
-            return _board.TileAt(rowIndex, 0).Symbol ==
-                   _board.TileAt(rowIndex, 1).Symbol &&
-                   _board.TileAt(rowIndex, 2).Symbol ==
-                   _board.TileAt(rowIndex, 1).Symbol;
+            return _board.TileAt(rowIndex, 0).CompareSymbol(_board.TileAt(rowIndex, 1)) &&
+                   _board.TileAt(rowIndex, 2).CompareSymbol(_board.TileAt(rowIndex, 1));
         }
 
         private bool IsRowPopulated(int rowIndex)
