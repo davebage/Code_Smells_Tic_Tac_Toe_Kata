@@ -63,14 +63,19 @@ namespace TicTacToe
     {
         private readonly List<Tile> _plays = new List<Tile>();
 
-        public Tile TileAt(int row, int column)
+        public Tile TileAt(Coordinate coordinate)
         {
-            return _plays.FirstOrDefault(tile => tile.CompareCoordinate(new Coordinate(row, column)));
+            return _plays.FirstOrDefault(tile => tile.CompareCoordinate(coordinate));
         }
 
-        public void AddTileAt(Token symbol, int row, int column)
+        public Tile TileAt(int row, int column)
         {
-            _plays.Add(new Tile(symbol, new Coordinate(row, column)));
+            return TileAt(new Coordinate(row, column));
+        }
+
+        public void AddTileAt(Token symbol, Coordinate coordinate)
+        {
+            _plays.Add(new Tile(symbol, coordinate));
         }
     }
 
@@ -79,20 +84,26 @@ namespace TicTacToe
         private Token _lastSymbol = Token.O;
         private readonly Board _board = new Board();
 
-        public void Play(Token symbol, int row, int column)
+        public void Play(Token symbol, Coordinate coordinate)
         {
             if (symbol == _lastSymbol)
             {
                 throw new Exception("Invalid player");
             }
 
-            if (_board.TileAt(row, column) != null)
+            if (_board.TileAt(coordinate) != null)
             {
                 throw new Exception("Invalid position");
             }
 
             _lastSymbol = symbol;
-            _board.AddTileAt(symbol, row, column);
+            _board.AddTileAt(symbol, coordinate);
+
+        }
+
+        public void Play(Token symbol, int row, int column)
+        {
+            Play(symbol, new Coordinate(row, column));
         }
 
         public Token? Winner()
