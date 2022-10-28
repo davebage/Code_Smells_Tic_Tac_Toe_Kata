@@ -1,11 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Q8GOQ7ZjPk8rMbPto9wLAigKKEsIruyrkLch82QZW4Pz+/g5VwXzlGhv1KPXwJubnhCurbGsInxMGW+meLRLyA==",
+  "dgSpecHash": "fux8BmZbcn3Ia8/nNCA1qc90eX246fp45KZIRAZ7/svf9OnLSkMzGJnbjd+/LHaM0vPY9WLOtNWw95ZHNXkVcA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Codurance_Dave\\projects\\Agile_Practices_Distilled\\Code_Smells_Tic_Tac_Toe_Kata\\TicTacToe\\TicTacToe.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\Codurance_Dave\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
-    "C:\\Users\\Codurance_Dave\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
-  ],
+  "expectedPackageFiles": [],
   "logs": []
 }
